@@ -15,6 +15,7 @@ def test_should_final_form_text():
     browser.element('#uploadPicture').type(current_dir)
     browser.element('#currentAddress').type('Moscow, Russia')
     browser.element('#subjectsInput').type('English').press_enter()
+    # browser.element('#dateOfBirthInput').type('01 May 1990').press_enter()
     # Open the date picker
     date_picker = browser.element('#dateOfBirthInput')
     date_picker.click()
@@ -26,7 +27,7 @@ def test_should_final_form_text():
     # Select the month
     month_dropdown = browser.element('.react-datepicker__month-select')
     month_dropdown.click()
-    month_option = month_dropdown.element('//option[@value="4"]')  # May is the 5th month, but indexing starts at 0
+    month_option = month_dropdown.element('//option[@value="4"]')
     month_option.click()
     # Select the day
     day = browser.all('.react-datepicker__day').filtered_by(have.exact_text('1')).first()
