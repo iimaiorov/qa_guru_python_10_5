@@ -1,7 +1,7 @@
 from selene import browser, be, have
 import os
 
-current_dir = os.path.abspath(os.path.dirname('test.txt'))
+current_dir = os.path.abspath(os.path.dirname('../test.txt'))
 
 
 def test_should_final_form_text():
