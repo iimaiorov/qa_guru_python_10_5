@@ -1,7 +1,7 @@
-from selene import browser, be, have
+from selene import browser, be, have, by
 import os
 
-current_dir = os.path.abspath(os.path.dirname('../test.txt'))
+current_dir = os.path.abspath('test.txt')
 
 
 def test_should_final_form_text():
@@ -9,9 +9,9 @@ def test_should_final_form_text():
     browser.element('#firstName').type('Ivan')
     browser.element('#lastName').type('Ivanov')
     browser.element('#userEmail').type('test@ya.ru')
-    browser.element('#genterWrapper').click()
+    browser.element('#genterWrapper').element(by.text('Male')).click()
     browser.element('#userNumber').type('1234567890')
-    browser.element('#hobbiesWrapper').click()
+    browser.element('#hobbiesWrapper').element(by.text('Sports')).click()
     browser.element('#uploadPicture').type(current_dir)
     browser.element('#currentAddress').type('Moscow, Russia')
     browser.element('#subjectsInput').type('English').press_enter()
@@ -37,4 +37,17 @@ def test_should_final_form_text():
     browser.element('#submit').click()
     browser.element('#example-modal-sizes-title-lg').should(
         have.text('Thanks for submitting the form'))
+    browser.element('.table-responsive').all('td:nth-child(2)').should(have.texts(
+        'Ivan Ivanov',
+        'test@ya.ru',
+        'Male',
+        '1234567890',
+        '01 May,1990',
+        'English',
+        'Sports',
+        'test.txt',
+        'Moscow, Russia',
+        'NCR Delhi'
+    ))
     browser.element('#closeLargeModal').click()
+
