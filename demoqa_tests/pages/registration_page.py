@@ -1,5 +1,7 @@
 from selene import have, command, by
 from selene.support.shared import browser
+from demoqa_tests.data.users import User
+
 import os
 
 
@@ -91,3 +93,20 @@ class RegistrationPage:
             user.address,
             user.state + ' ' + user.city
         ))
+
+    def register(self, user: User):
+        self.fill_first_name(user.first_name)
+        self.fill_last_name(user.last_name)
+        self.fill_email(user.email)
+        self.select_gender(user.gender)
+        self.fill_mobile(user.phone)
+        self.select_hobbies(user.hobbies)
+        self.upload_picture(user.picture)
+        self.fill_address(user.address)
+        self.fill_subjects(user.subjects)
+        self.select_date_of_birth(user.birth_year, user.birth_month, user.birth_date)
+        self.select_state(user.state)
+        self.select_city(user.city)
+        self.submit()
+        return self
+
