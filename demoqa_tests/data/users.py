@@ -16,7 +16,7 @@ class User:
     birth_year: str
     subjects: str
     hobbies: str
-    picture: str
+    file_name: str
 
 
 teacher = User(first_name='Karina',
@@ -31,4 +31,4 @@ teacher = User(first_name='Karina',
                birth_year='1980',
                subjects='Hindi',
                hobbies='Music',
-               picture='test.txt')
+               file_name='test.txt')

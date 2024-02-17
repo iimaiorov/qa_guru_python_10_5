@@ -1,8 +1,7 @@
 from selene import have, command, by
-from selene.support.shared import browser
+from selene import browser
 from demoqa_tests.data.users import User
-
-import os
+from demoqa_tests.resource import path
 
 
 class RegistrationPage:
@@ -45,8 +44,8 @@ class RegistrationPage:
     def select_hobbies(self, hobbies):
         self.hobbies.element(by.text(hobbies)).click()
 
-    def upload_picture(self, picture):
-        self.picture.send_keys(os.path.abspath(f'resource/{picture}'))
+    def upload_picture(self, file_name):
+        self.picture.send_keys(path(file_name))
 
     def fill_address(self, address):
         self.address.type(address)
@@ -82,16 +81,16 @@ class RegistrationPage:
 
     def should_have_registered(self, user):
         self.registered_user_data.should(have.texts(
-            user.first_name + ' ' + user.last_name,
+            f'{user.first_name} {user.last_name}',
             user.email,
             user.gender,
             user.phone,
-            user.birth_date + ' ' + user.birth_month + ',' + user.birth_year,
+            f'{user.birth_date} {user.birth_month},{user.birth_year}',
             user.subjects,
             user.hobbies,
-            user.picture,
+            user.file_name,
             user.address,
-            user.state + ' ' + user.city
+            f'{user.state} {user.city}'
         ))
 
     def register(self, user: User):
@@ -101,7 +100,7 @@ class RegistrationPage:
         self.select_gender(user.gender)
         self.fill_mobile(user.phone)
         self.select_hobbies(user.hobbies)
-        self.upload_picture(user.picture)
+        self.upload_picture(user.file_name)
         self.fill_address(user.address)
         self.fill_subjects(user.subjects)
         self.select_date_of_birth(user.birth_year, user.birth_month, user.birth_date)
@@ -109,4 +108,3 @@ class RegistrationPage:
         self.select_city(user.city)
         self.submit()
         return self
-
