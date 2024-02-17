@@ -1,12 +1,11 @@
-from selene import have, command, by
-from selene import browser
-from demoqa_tests.data.users import User
+from selene import have, command, by, browser
 from demoqa_tests.resource import path
 
 
 class RegistrationPage:
     def __init__(self):
         self.first_name = browser.element('#firstName')
+
         self.last_name = browser.element('#lastName')
         self.email = browser.element('#userEmail')
         self.gender = browser.element('#genterWrapper')
@@ -79,16 +78,16 @@ class RegistrationPage:
     def submit(self):
         self.submit_button.click()
 
-    def should_have_registered(self, user):
+    def should_have_registered(self, first_name, last_name,email, gender, phone, birth_date, birth_month, birth_year, subjects, hobbies, file_name, address, state, city):
         self.registered_user_data.should(have.texts(
-            f'{user.first_name} {user.last_name}',
-            user.email,
-            user.gender,
-            user.phone,
-            f'{user.birth_date} {user.birth_month},{user.birth_year}',
-            user.subjects,
-            user.hobbies,
-            user.file_name,
-            user.address,
-            f'{user.state} {user.city}'
+            f'{first_name} {last_name}',
+            email,
+            gender,
+            phone,
+            f'{birth_date} {birth_month},{birth_year}',
+            subjects,
+            hobbies,
+            file_name,
+            address,
+            f'{state} {city}'
         ))
