@@ -1,5 +1,4 @@
-from selene import have, command, by
-from selene import browser
+from selene import have, command, by, browser
 from demoqa_tests.data.users import User
 from demoqa_tests.resource import path
 
