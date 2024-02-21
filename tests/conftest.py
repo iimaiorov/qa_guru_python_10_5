@@ -11,10 +11,13 @@ import project
 @pytest.fixture(autouse=True)
 def settings():
     browser.config.base_url = project.Config().base_url
+    browser.config.window_height = project.Config().window_height
+    browser.config.window_width = project.Config().window_width
+
     options = Options()
     selenoid_capabilities = {
         "browserName": "chrome",
-        "browserVersion": "122.0",
+        "browserVersion": "100.0",
         "selenoid:options": {
             "enableVNC": True,
             "enableVideo": True
@@ -25,6 +28,7 @@ def settings():
         command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
         options=options
     )
+    browser.config.driver = driver
 
     yield browser
     attach.add_screenshot(browser)
