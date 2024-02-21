@@ -24,6 +24,10 @@ class RegistrationPage:
 
     def open(self):
         browser.open('/')
+        browser.element('[aria-label="Consent"]').click()
+        browser.all('[id^=google_ads][id$=container__]').with_(timeout=10).should(
+            have.size_greater_than_or_equal(3))
+        browser.all('[id^=google_ads][id$=container__]').perform(command.js.remove)
 
     def fill_first_name(self, first_name):
         self.first_name.type(first_name)
