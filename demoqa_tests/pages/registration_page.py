@@ -39,13 +39,13 @@ class RegistrationPage:
         self.email.type(email)
 
     def select_gender(self, gender):
-        self.gender.element(by.text(gender)).click()
+        self.gender.element(by.text(gender.value)).click()
 
     def fill_mobile(self, mobile):
         self.mobile.type(mobile)
 
     def select_hobbies(self, hobbies):
-        self.hobbies.element(by.text(hobbies)).click()
+        self.hobbies.element(by.text(hobbies.value)).click()
 
     def upload_picture(self, file_name):
         self.picture.send_keys(path(file_name))
@@ -54,7 +54,7 @@ class RegistrationPage:
         self.address.type(address)
 
     def fill_subjects(self, subjects):
-        self.subjects.type(subjects).press_enter()
+        self.subjects.type(subjects.value).press_enter()
 
     def select_date_of_birth(self, year, month, day):
         self.date_of_birth.click()
@@ -86,11 +86,11 @@ class RegistrationPage:
         self.registered_user_data.should(have.texts(
             f'{user.first_name} {user.last_name}',
             user.email,
-            user.gender,
+            user.gender.value,
             user.phone,
             f'{user.birth_date} {user.birth_month},{user.birth_year}',
-            user.subjects,
-            user.hobbies,
+            user.subjects.value,
+            user.hobbies.value,
             user.file_name,
             user.address,
             f'{user.state} {user.city}'
